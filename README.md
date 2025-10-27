@@ -91,7 +91,7 @@ Git
 
 Opción 1: Docker (Recomendada)
 
-# Clonar repositorio
+```# Clonar repositorio
 git clone <url-del-repositorio>
 cd nba-analysis
 
@@ -101,8 +101,10 @@ docker-compose up --build
 # Acceder a los servicios:
 # Airflow: http://localhost:8080 (usuario: airflow, contraseña: airflow)
 # Kedro Viz: http://localhost:4141
+```
 
 Opción 2: Desarrollo Local
+```
 # Clonar y configurar
 git clone <url-del-repositorio>
 cd nba-analysis
@@ -124,6 +126,7 @@ dvc init
 
 # Ejecutar pipeline
 kedro run
+```
 
 📊 Datasets Utilizados
 El proyecto utiliza 3 datasets principales de Kaggle (NBA Games):
@@ -135,7 +138,9 @@ teams.csv	Información de los equipos
 Fuente: Kaggle - NBA Games Dataset
 
 🐳 Configuración de Docker
+
 Construir y Ejecutar
+```
 # Construir imágenes
 docker-compose build
 
@@ -147,6 +152,7 @@ docker-compose logs -f
 
 # Detener servicios
 docker-compose down
+```
 
 Resumen de Servicios
 Servicio	Puerto	Propósito
@@ -155,6 +161,8 @@ Airflow	8080	Orquestación de pipelines
 Kedro Viz	4141	Visualización de pipelines
 
 Comandos Útiles de Docker
+
+```
 
 # Ejecutar comandos específicos
 docker-compose run app kedro run
@@ -166,16 +174,18 @@ docker-compose exec app bash
 # Ver logs de servicios específicos
 docker-compose logs -f app
 
+```
+
 🌪️ Orquestación con Airflow
 
 Iniciar Airflow
-
+```
 # Usando Docker Compose
 docker-compose -f docker-compose-airflow.yml up -d
 
 # Acceder a la interfaz web: http://localhost:8080
 # Usuario: airflow, Contraseña: airflow
-
+```
 DAG Principal - Pipeline NBA
 El DAG de Airflow ejecuta automáticamente:
 
@@ -188,6 +198,7 @@ El DAG de Airflow ejecuta automáticamente:
 4.Generación de predicciones y reportes
 
 Comandos de Airflow
+```
 
 # Listar DAGs
 docker-compose -f docker-compose-airflow.yml exec webserver airflow dags list
@@ -197,11 +208,11 @@ docker-compose -f docker-compose-airflow.yml exec webserver airflow dags trigger
 
 # Ver estado de tareas
 docker-compose -f docker-compose-airflow.yml exec webserver airflow tasks list nba_pipeline
-
+```
 📊 DVC (Control de Versiones de Datos)
 
 Configuración Inicial
-
+```
 # Inicializar DVC
 dvc init
 
@@ -225,9 +236,9 @@ dvc add models/regression_model.pkl
 # Hacer commit en Git
 git add .dvc data/01_raw/.gitignore models/.gitignore
 git commit -m "Añadir datasets y modelos a DVC"
-
+```
 Flujo de Trabajo Diario
-
+```
 # Obtener datos más recientes
 dvc pull
 
@@ -245,9 +256,10 @@ dvc push
 git add .dvc
 git commit -m "Actualizar modelos y predicciones"
 git push
+```
 
 Reproducir Experimentos
-
+```
 # Reproducir pipeline específico
 dvc repro pipelines/data_processing
 
@@ -256,11 +268,11 @@ dvc status
 
 # Comparar métricas entre versiones
 dvc metrics diff
-
+```
 🏃‍♂️ Ejecución del Proyecto
 
 Pipeline Completo
-
+```
 # Usando Kedro directamente
 kedro run
 
@@ -269,9 +281,9 @@ docker-compose run app kedro run
 
 # Usando Airflow
 # Activar el DAG nba_pipeline en la interfaz de Airflow
-
+```
 Pipelines Específicos
-
+```
 # Solo procesamiento de datos
 kedro run --pipeline=data_engineering
 
@@ -281,9 +293,9 @@ kedro run --pipeline=classification
 
 # Solo entrenamiento de regresión
 kedro run --pipeline=regression
-
+```
 Visualización y Análisis
-
+```
 # Visualización del pipeline
 kedro viz
 # Acceder: http://localhost:4141
@@ -293,10 +305,10 @@ kedro jupyter notebook
 
 # Notebook de análisis específico
 kedro jupyter notebook --notebook-path notebooks/04_model_analysis.ipynb
-
+```
 🔧 Comandos Útiles
 Información del Proyecto
-
+```
 # Resumen del proyecto
 kedro info
 
@@ -308,9 +320,9 @@ kedro test
 
 # Crear nuevo pipeline
 kedro pipeline create <nombre_pipeline>
-
+```
 Gestión de Servicios
-
+```
 # Iniciar todos los servicios
 docker-compose up -d
 
@@ -322,9 +334,9 @@ docker-compose ps
 
 # Ver logs de servicios
 docker-compose logs -f <nombre_servicio>
-
+```
 Gestión de Datos y Modelos
-
+```
 # Verificar estado de DVC
 dvc status
 
@@ -336,3 +348,4 @@ dvc push
 
 # Reproducir pipeline
 dvc repro
+```
