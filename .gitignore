@@ -12,6 +12,11 @@ __pycache__/
 .pytest_cache/
 .mypy_cache/
 
+# Ignorar archivos grandes generados
+data/08_reporting/*.pkl
+*.pkl
+
+
 # Jupyter
 .ipynb_checkpoints/
 
