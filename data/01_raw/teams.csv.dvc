@@ -1,0 +1,5 @@
+outs:
+- md5: f98719a95df52602858e10100a4adc7d
+  size: 4063
+  hash: md5
+  path: teams.csv

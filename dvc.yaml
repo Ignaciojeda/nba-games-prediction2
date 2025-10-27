@@ -1,0 +1,50 @@
+stages:
+  data_processing:
+    cmd: python -m kedro run --pipeline=data_engineering
+    deps:
+      - data/01_raw/games.csv
+      - data/01_raw/games_details.csv
+      - data/01_raw/teams.csv
+      - src/proyecto_ml
+    params:
+      - processing_params
+    outs:
+      - data/02_intermediate/
+    metrics:
+      - reports/data_quality_metrics.json
+
+  feature_engineering:
+    cmd: python -m kedro run --pipeline=feature_engineering
+    deps:
+      - data/02_intermediate/
+      - src/proyecto_ml
+    params:
+      - feature_params
+    outs:
+      - data/04_features/
+    metrics:
+      - reports/feature_metrics.json
+
+  model_training_classification:
+    cmd: python -m kedro run --pipeline=classification
+    deps:
+      - data/04_features/
+      - src/proyecto_ml
+    params:
+      - classification_params
+    outs:
+      - models/classification/
+    metrics:
+      - reports/classification_metrics.json
+
+  model_training_regression:
+    cmd: python -m kedro run --pipeline=regression
+    deps:
+      - data/04_features/
+      - src/proyecto_ml
+    params:
+      - regression_params
+    outs:
+      - models/regression/
+    metrics:
+      - reports/regression_metrics.json

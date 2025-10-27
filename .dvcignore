@@ -1,3 +1,32 @@
-# Add patterns of files dvc should ignore, which could improve
-# the performance. Learn more at
-# https://dvc.org/doc/user-guide/dvcignore
+# Entornos virtuales
+venv/
+.nba_kedro_env/
+.env/
+.venv/
+
+# Cache de Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
+.mypy_cache/
+
+# Jupyter
+.ipynb_checkpoints/
+*.ipynb
+
+# Logs
+logs/
+*.log
+
+# Sistema
+.DS_Store
+Thumbs.db
+
+# Kedro
+conf/local/
+
+# No versionar datos procesados temporalmente (sí los finales)
+data/02_intermediate/tmp/
+data/03_primary/tmp/

@@ -1,0 +1,37 @@
+# Parámetros de procesamiento de datos
+processing_params:
+  missing_threshold: 0.3
+  outlier_method: "iqr"
+  target_columns:
+    - "HOME_TEAM_WINS"
+    - "PTS_home"
+
+# Parámetros de ingeniería de características
+feature_params:
+  categorical_encoder: "onehot"
+  numerical_scaler: "standard"
+  feature_selection: true
+
+# Parámetros de clasificación
+classification_params:
+  test_size: 0.2
+  random_state: 42
+  cv_folds: 5
+  models:
+    - "logistic_regression"
+    - "random_forest"
+    - "xgboost"
+    - "svm"
+    - "gradient_boosting"
+
+# Parámetros de regresión
+regression_params:
+  test_size: 0.2
+  random_state: 42
+  cv_folds: 5
+  models:
+    - "linear_regression"
+    - "random_forest"
+    - "xgboost"
+    - "svm"
+    - "gradient_boosting"
