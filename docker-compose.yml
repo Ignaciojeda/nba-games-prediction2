@@ -1,0 +1,41 @@
+services:
+  kedro-app:
+    build: .
+    container_name: nba-ml-kedro
+    volumes:
+      - ./data:/app/data
+      - ./conf:/app/conf
+      - ./logs:/app/logs
+    ports:
+      - "4141:4141"
+    environment:
+      - PYTHONPATH=/app
+    command: kedro run
+
+  kedro-viz:
+    build: .
+    container_name: nba-kedro-viz
+    ports:
+      - "4142:4141"
+    command: kedro viz --host 0.0.0.0
+
+  # Servicio de Airflow (opcional - podemos hacerlo después)
+  # airflow:
+  #   image: apache/airflow:2.7.0
+  #   container_name: nba-airflow
+  #   environment:
+  #     - AIRFLOW__CORE__EXECUTOR=LocalExecutor
+  #     - AIRFLOW__CORE__LOAD_EXAMPLES=false
+  #   volumes:
+  #     - ./airflow/dags:/opt/airflow/dags
+  #     - ./airflow/logs:/opt/airflow/logs
+  #     - .:/opt/airflow/nba_project
+  #   ports:
+  #     - "8080:8080"
+  #   command: >
+  #     bash -c "
+  #       airflow db init &&
+  #       airflow users create --username admin --password admin --firstname Admin --lastname User --role Admin --email admin@example.com &&
+  #       airflow scheduler &
+  #       airflow webserver
+  #     "

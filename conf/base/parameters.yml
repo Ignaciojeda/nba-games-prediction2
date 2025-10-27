@@ -1,0 +1,161 @@
+# PARÁMETROS GLOBALES
+random_state: 42
+test_size: 0.2
+cv_folds: 5
+
+# Configuraciones generales
+rolling_window: 5
+min_games_per_season: 5
+outlier_zscore: 4.0
+
+# Columnas críticas que deben existir en games
+required_game_cols:
+  - GAME_ID
+  - SEASON
+  - GAME_DATE_EST
+  - HOME_TEAM_ID
+  - VISITOR_TEAM_ID
+  - PTS_home
+  - PTS_away
+  - HOME_TEAM_WINS
+
+# PARÁMETROS DATA ENGINEERING (NUEVA SECCIÓN)
+data_engineering:
+  features_clasificacion:
+    - 'PTS_home'
+    - 'PTS_away' 
+    - 'FG_PCT_home'
+    - 'FG_PCT_away'
+    - 'FT_PCT_home'
+    - 'FT_PCT_away'
+    - 'FG3_PCT_home'
+    - 'FG3_PCT_away'
+    - 'REB_home'
+    - 'REB_away'
+    - 'AST_home'
+    - 'AST_away'
+    - 'HOME_HIST_HOME_WIN_PCT'
+    - 'AWAY_HIST_AWAY_WIN_PCT'
+    - 'WIN_PCT_DIFF'
+  target_clasificacion: 'HOME_TEAM_WINS'
+
+# PARÁMETROS MODELOS CLASIFICACIÓN
+classification_models:
+  logistic_regression:
+    model:
+      class: sklearn.linear_model.LogisticRegression
+      kwargs:
+        random_state: 42
+        max_iter: 1000
+    params:
+      C: [0.1, 1.0, 10.0]
+      penalty: ['l2']
+      solver: ['liblinear']
+
+  random_forest:
+    model:
+      class: sklearn.ensemble.RandomForestClassifier
+      kwargs:
+        random_state: 42
+    params:
+      n_estimators: [100, 200]
+      max_depth: [10, 20, null]
+      min_samples_split: [2, 5]
+
+  decision_tree:
+    model:
+      class: sklearn.tree.DecisionTreeClassifier
+      kwargs:
+        random_state: 42
+    params:
+      max_depth: [5, 10, 15]
+      min_samples_split: [2, 5, 10]
+
+  svm:
+    model:
+      class: sklearn.svm.SVC
+      kwargs:
+        random_state: 42
+        probability: true
+    params:
+      C: [0.1, 1.0, 10.0]
+      kernel: ['rbf', 'linear']
+
+  naive_bayes:
+    model:
+      class: sklearn.naive_bayes.GaussianNB
+      kwargs: {}
+
+# PARÁMETROS REGRESIÓN
+regression:
+  features:
+    - 'FG_PCT_home'
+    - 'FT_PCT_home'
+    - 'FG3_PCT_home'
+    - 'AST_home'
+    - 'REB_home'
+    - 'FG_PCT_away'
+    - 'FT_PCT_away'
+    - 'FG3_PCT_away'
+    - 'AST_away'
+    - 'REB_away'
+    - 'YEAR'
+    - 'MONTH'
+  targets:
+    local_strength: 'PTS_home'
+    away_weakness: 'PTS_away'
+    point_differential: 'POINT_DIFFERENTIAL'
+  team_identifiers:
+    - 'TEAM_ABBREVIATION'
+    - 'TEAM_ID'
+  sample_size: 10000
+  cv_folds: 5
+  test_size: 0.2
+  random_state: 42
+  gridsearch_params:
+    random_forest:
+      model__n_estimators: [100, 200]
+      model__max_depth: [10, 20]
+    gradient_boosting:
+      model__n_estimators: [100, 200]
+      model__learning_rate: [0.1, 0.01]
+    svr:
+      model__C: [0.1, 1.0]
+      model__kernel: ['rbf', 'linear']
+    ridge:
+      model__alpha: [0.1, 1.0, 10.0]
+    lasso:
+      model__alpha: [0.1, 1.0, 10.0]
+    elastic_net:
+      model__alpha: [0.1, 1.0]
+      model__l1_ratio: [0.2, 0.5, 0.8]
+    knn:
+      model__n_neighbors: [3, 5, 7]
+
+# Configuración para manejo de missing values
+data_preparation:
+  missing_values:
+    numeric_strategy: "median"
+    categorical_strategy: "most_frequent"
+
+  # Configuración para feature engineering
+  feature_engineering:
+    min_games_for_stats: 10
+    seasons_to_include: [2015, 2016, 2017, 2018, 2019, 2020]
+
+# Configuración union_tablas
+union_tablas:
+  cols_games_to_drop:
+    - 'TEAM_ID_home'
+    - 'TEAM_ID_away'
+    - 'GAME_STATUS_TEXT'
+  cols_teams_to_drop:
+    - 'LEAGUE_ID'
+    - 'MAX_YEAR'
+    - 'MIN_YEAR'
+  cols_final_to_drop:
+    - 'ABBREVIATION'
+    - 'CITY'
+  rename_columns:
+    visitor_to_away: "AWAY_TEAM_ID"
+    away_from: "VISITOR_TEAM_ID"

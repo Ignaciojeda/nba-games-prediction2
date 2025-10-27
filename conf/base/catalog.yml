@@ -1,0 +1,108 @@
+# conf/base/catalog.yml
+# BASADO EN TU CONFIGURACIÓN ORIGINAL QUE FUNCIONABA
+
+# === RAW DATASETS ===
+raw_games:
+  type: pandas.CSVDataset
+  filepath: data/01_raw/games.csv
+  load_args:
+    parse_dates: ["GAME_DATE_EST"]
+
+raw_teams:
+  type: pandas.CSVDataset
+  filepath: data/01_raw/teams.csv
+
+raw_games_details:
+  type: pandas.CSVDataset
+  filepath: data/01_raw/games_details.csv
+
+# === DATA ENGINEERING OUTPUTS ===
+games_cleaned:
+  type: pandas.ParquetDataset
+  filepath: data/02_intermediate/games_cleaned.parquet
+
+teams_cleaned:
+  type: pandas.ParquetDataset
+  filepath: data/02_intermediate/teams_cleaned.parquet
+
+games_details_cleaned:
+  type: pandas.ParquetDataset
+  filepath: data/02_intermediate/games_details_cleaned.parquet
+
+games_validated:
+  type: pandas.ParquetDataset
+  filepath: data/02_intermediate/games_validated.parquet
+
+team_features_base:
+  type: pandas.ParquetDataset
+  filepath: data/03_primary/team_features_base.parquet
+
+game_level_features:
+  type: pandas.ParquetDataset
+  filepath: data/03_primary/game_level_features.parquet
+
+games_teams_details:
+  type: pandas.ParquetDataset
+  filepath: data/03_primary/games_teams_details.parquet
+
+# === MODEL INPUTS ===
+model_input_classification:
+  type: pandas.ParquetDataset
+  filepath: data/05_model_input/classification_data.parquet
+
+model_input_regression:
+  type: pandas.ParquetDataset
+  filepath: data/05_model_input/regression_data.parquet
+
+# === VALIDATION & EDA ===
+validation_report:
+  type: json.JSONDataset
+  filepath: data/05_model_input/validation_report.json
+
+eda_visualizations:
+  type: matplotlib.MatplotlibWriter
+  filepath: data/05_model_input/eda_plots.png
+
+# === REGRESSION PIPELINE DATASETS ===
+regression_data:
+  type: pandas.ParquetDataset
+  filepath: data/04_feature/regression_data.parquet
+  save_args:
+    index: false
+
+# Modelos entrenados
+local_strength_model:
+  type: pickle.PickleDataset
+  filepath: data/06_models/local_strength_model.pkl
+  versioned: true
+
+away_weakness_model:
+  type: pickle.PickleDataset
+  filepath: data/06_models/away_weakness_model.pkl
+  versioned: true
+
+point_differential_model:
+  type: pickle.PickleDataset
+  filepath: data/06_models/point_differential_model.pkl
+  versioned: true
+
+# Resultados
+local_strength_results:
+  type: pickle.PickleDataset
+  filepath: data/08_reporting/local_strength_results.pkl
+  versioned: true
+
+away_weakness_results:
+  type: pickle.PickleDataset
+  filepath: data/08_reporting/away_weakness_results.pkl
+  versioned: true
+
+point_differential_results:
+  type: pickle.PickleDataset
+  filepath: data/08_reporting/point_differential_results.pkl
+  versioned: true
+
+model_report:
+  type: json.JSONDataset
+  filepath: data/08_reporting/model_report.json
+  versioned: true
