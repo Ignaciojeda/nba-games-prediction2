@@ -1,0 +1,317 @@
+{
+  "summary": {
+    "total_targets": 3,
+    "best_models": {
+      "local_strength": "gradient_boosting",
+      "away_weakness": "gradient_boosting",
+      "point_differential": "ridge"
+    },
+    "best_scores": {
+      "local_strength": 0.7868955509817149,
+      "away_weakness": 0.7826197406903692,
+      "point_differential": 0.736883924865321
+    }
+  },
+  "detailed_results": {
+    "local_strength": {
+      "random_forest": {
+        "best_params": {
+          "model__max_depth": 20,
+          "model__n_estimators": 200
+        },
+        "cv_score": 0.7327127884495195,
+        "test_r2": 0.7352999868909705,
+        "test_mae": 5.36455938271299,
+        "test_mse": 46.602165203355206
+      },
+      "gradient_boosting": {
+        "best_params": {
+          "model__learning_rate": 0.1,
+          "model__n_estimators": 200
+        },
+        "cv_score": 0.7787812179260648,
+        "test_r2": 0.7868955509817149,
+        "test_mae": 4.845426916558038,
+        "test_mse": 37.51842934223617
+      },
+      "svr": {
+        "best_params": {
+          "model__C": 1.0,
+          "model__kernel": "linear"
+        },
+        "cv_score": 0.7593621842431151,
+        "test_r2": 0.7805193028536299,
+        "test_mae": 4.929107697117734,
+        "test_mse": 38.64100944773924
+      },
+      "ridge": {
+        "best_params": {
+          "model__alpha": 1.0
+        },
+        "cv_score": 0.7596464309472266,
+        "test_r2": 0.7798441414010683,
+        "test_mae": 4.94725910410962,
+        "test_mse": 38.7598760287479
+      },
+      "lasso": {
+        "best_params": {
+          "model__alpha": 0.1
+        },
+        "cv_score": 0.7588615183847927,
+        "test_r2": 0.7775149496815105,
+        "test_mae": 4.9706489747853535,
+        "test_mse": 39.1699454353573
+      },
+      "elastic_net": {
+        "best_params": {
+          "model__alpha": 0.1,
+          "model__l1_ratio": 0.8
+        },
+        "cv_score": 0.7571258877673723,
+        "test_r2": 0.7749244338204833,
+        "test_mae": 5.00185458833319,
+        "test_mse": 39.62602266293106
+      },
+      "knn": {
+        "best_params": {
+          "model__n_neighbors": 7
+        },
+        "cv_score": 0.651084058296098,
+        "test_r2": 0.6661605622010346,
+        "test_mae": 6.001142857142857,
+        "test_mse": 58.77461224489796
+      }
+    },
+    "away_weakness": {
+      "random_forest": {
+        "best_params": {
+          "model__max_depth": 20,
+          "model__n_estimators": 200
+        },
+        "cv_score": 0.7376656011358765,
+        "test_r2": 0.7367559027428914,
+        "test_mae": 5.38655173989858,
+        "test_mse": 47.22281731127772
+      },
+      "gradient_boosting": {
+        "best_params": {
+          "model__learning_rate": 0.1,
+          "model__n_estimators": 200
+        },
+        "cv_score": 0.7750972334364372,
+        "test_r2": 0.7826197406903692,
+        "test_mae": 4.922243266387641,
+        "test_mse": 38.995397729396466
+      },
+      "svr": {
+        "best_params": {
+          "model__C": 0.1,
+          "model__kernel": "linear"
+        },
+        "cv_score": 0.7637542476250418,
+        "test_r2": 0.7765450295683036,
+        "test_mae": 4.996017937395545,
+        "test_mse": 40.08512766645906
+      },
+      "ridge": {
+        "best_params": {
+          "model__alpha": 10.0
+        },
+        "cv_score": 0.764460655409054,
+        "test_r2": 0.7769324673052556,
+        "test_mae": 4.998151596621306,
+        "test_mse": 40.015626007496095
+      },
+      "lasso": {
+        "best_params": {
+          "model__alpha": 0.1
+        },
+        "cv_score": 0.7635060191833812,
+        "test_r2": 0.7741571393119835,
+        "test_mae": 5.033359447248024,
+        "test_mse": 40.51348638944099
+      },
+      "elastic_net": {
+        "best_params": {
+          "model__alpha": 0.1,
+          "model__l1_ratio": 0.8
+        },
+        "cv_score": 0.7620604253964303,
+        "test_r2": 0.7709398161736343,
+        "test_mae": 5.068306104471349,
+        "test_mse": 41.09063537160875
+      },
+      "knn": {
+        "best_params": {
+          "model__n_neighbors": 7
+        },
+        "cv_score": 0.662364631784258,
+        "test_r2": 0.6476688005530745,
+        "test_mae": 6.283785714285714,
+        "test_mse": 63.2039693877551
+      }
+    },
+    "point_differential": {
+      "random_forest": {
+        "best_params": {
+          "model__max_depth": 20,
+          "model__n_estimators": 200
+        },
+        "cv_score": 0.6979284981223233,
+        "test_r2": 0.7054032723046698,
+        "test_mae": 5.815204514414287,
+        "test_mse": 54.67197247139349
+      },
+      "gradient_boosting": {
+        "best_params": {
+          "model__learning_rate": 0.1,
+          "model__n_estimators": 200
+        },
+        "cv_score": 0.7234575075776417,
+        "test_r2": 0.7232396256386209,
+        "test_mae": 5.665668886834713,
+        "test_mse": 51.36185892704919
+      },
+      "svr": {
+        "best_params": {
+          "model__C": 1.0,
+          "model__kernel": "linear"
+        },
+        "cv_score": 0.729248849834079,
+        "test_r2": 0.7365401822765743,
+        "test_mae": 5.549404262472346,
+        "test_mse": 48.89350949203297
+      },
+      "ridge": {
+        "best_params": {
+          "model__alpha": 10.0
+        },
+        "cv_score": 0.7293846258180036,
+        "test_r2": 0.736883924865321,
+        "test_mae": 5.545078662776128,
+        "test_mse": 48.829716911931264
+      },
+      "lasso": {
+        "best_params": {
+          "model__alpha": 0.1
+        },
+        "cv_score": 0.7290255510335832,
+        "test_r2": 0.7366848612593553,
+        "test_mae": 5.54386450897579,
+        "test_mse": 48.86665961686404
+      },
+      "elastic_net": {
+        "best_params": {
+          "model__alpha": 0.1,
+          "model__l1_ratio": 0.8
+        },
+        "cv_score": 0.7288588869201622,
+        "test_r2": 0.7362098437969948,
+        "test_mae": 5.547318632930015,
+        "test_mse": 48.95481450517107
+      },
+      "knn": {
+        "best_params": {
+          "model__n_neighbors": 7
+        },
+        "cv_score": 0.6479269130757539,
+        "test_r2": 0.6460063328413614,
+        "test_mae": 6.380714285714285,
+        "test_mse": 65.695
+      }
+    }
+  },
+  "parameters_used": {
+    "features": [
+      "FG_PCT_home",
+      "FT_PCT_home",
+      "FG3_PCT_home",
+      "AST_home",
+      "REB_home",
+      "FG_PCT_away",
+      "FT_PCT_away",
+      "FG3_PCT_away",
+      "AST_away",
+      "REB_away",
+      "YEAR",
+      "MONTH"
+    ],
+    "targets": {
+      "local_strength": "PTS_home",
+      "away_weakness": "PTS_away",
+      "point_differential": "POINT_DIFFERENTIAL"
+    },
+    "team_identifiers": [
+      "TEAM_ABBREVIATION",
+      "TEAM_ID"
+    ],
+    "sample_size": 10000,
+    "cv_folds": 5,
+    "test_size": 0.2,
+    "random_state": 42,
+    "gridsearch_params": {
+      "random_forest": {
+        "model__n_estimators": [
+          100,
+          200
+        ],
+        "model__max_depth": [
+          10,
+          20
+        ]
+      },
+      "gradient_boosting": {
+        "model__n_estimators": [
+          100,
+          200
+        ],
+        "model__learning_rate": [
+          0.1,
+          0.01
+        ]
+      },
+      "svr": {
+        "model__C": [
+          0.1,
+          1.0
+        ],
+        "model__kernel": [
+          "rbf",
+          "linear"
+        ]
+      },
+      "ridge": {
+        "model__alpha": [
+          0.1,
+          1.0,
+          10.0
+        ]
+      },
+      "lasso": {
+        "model__alpha": [
+          0.1,
+          1.0,
+          10.0
+        ]
+      },
+      "elastic_net": {
+        "model__alpha": [
+          0.1,
+          1.0
+        ],
+        "model__l1_ratio": [
+          0.2,
+          0.5,
+          0.8
+        ]
+      },
+      "knn": {
+        "model__n_neighbors": [
+          3,
+          5,
+          7
+        ]
+      }
+    }
+  }
+}

@@ -1,14 +1,36 @@
-__pycache__
+# Crear o actualizar .dockerignore
+@"
+# Python
+__pycache__/
 *.pyc
 *.pyo
-.pytest_cache
-.mypy_cache
-.coverage
-.tox
-.ipynb_checkpoints
-.DS_Store
+*.pyd
+.pytest_cache/
+.mypy_cache/
+
+# Airflow
+airflow/logs/
+airflow/__pycache__/
+
+# Jupyter
+.ipynb_checkpoints/
+*.ipynb
+
+# Environment
 .env
 .venv
 venv/
-data/**/*.csv
-logs/
+.nba_kedro_env/
+
+# System
+.DS_Store
+Thumbs.db
+
+# Git
+.git/
+.gitignore
+
+# DVC
+.dvc/
+dvc_storage/
+"@ | Out-File -FilePath ".dockerignore" -Encoding UTF8

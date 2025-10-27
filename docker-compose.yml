@@ -5,7 +5,6 @@ services:
     volumes:
       - ./data:/app/data
       - ./conf:/app/conf
-      - ./logs:/app/logs
     ports:
       - "4141:4141"
     environment:
@@ -19,23 +18,58 @@ services:
       - "4142:4141"
     command: kedro viz --host 0.0.0.0
 
-  # Servicio de Airflow (opcional - podemos hacerlo después)
-  # airflow:
-  #   image: apache/airflow:2.7.0
-  #   container_name: nba-airflow
-  #   environment:
-  #     - AIRFLOW__CORE__EXECUTOR=LocalExecutor
-  #     - AIRFLOW__CORE__LOAD_EXAMPLES=false
-  #   volumes:
-  #     - ./airflow/dags:/opt/airflow/dags
-  #     - ./airflow/logs:/opt/airflow/logs
-  #     - .:/opt/airflow/nba_project
-  #   ports:
-  #     - "8080:8080"
-  #   command: >
-  #     bash -c "
-  #       airflow db init &&
-  #       airflow users create --username admin --password admin --firstname Admin --lastname User --role Admin --email admin@example.com &&
-  #       airflow scheduler &
-  #       airflow webserver
-  #     "
+  postgres:
+    image: postgres:13
+    container_name: nba-postgres
+    environment:
+      - POSTGRES_USER=airflow
+      - POSTGRES_PASSWORD=airflow
+      - POSTGRES_DB=airflow
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  airflow-init:
+    image: apache/airflow:2.7.0
+    container_name: nba-airflow-init
+    environment:
+      - AIRFLOW__CORE__EXECUTOR=LocalExecutor
+      - AIRFLOW__DATABASE__SQL_ALCHEMY_CONN=postgresql+psycopg2://airflow:airflow@postgres/airflow
+      - AIRFLOW__CORE__LOAD_EXAMPLES=false
+    volumes:
+      - ./airflow/dags:/opt/airflow/dags
+    depends_on:
+      - postgres
+    command: >
+      bash -c "
+        airflow db init &&
+        airflow users create --username admin --password admin --firstname Admin --lastname User --role Admin --email admin@example.com
+      "
+    restart: "no"
+
+  airflow:
+    image: apache/airflow:2.7.0
+    container_name: nba-airflow
+    environment:
+      - AIRFLOW__CORE__EXECUTOR=LocalExecutor
+      - AIRFLOW__DATABASE__SQL_ALCHEMY_CONN=postgresql+psycopg2://airflow:airflow@postgres/airflow
+      - AIRFLOW__CORE__DAGS_FOLDER=/opt/airflow/dags
+      - AIRFLOW__CORE__LOAD_EXAMPLES=false
+    volumes:
+      - ./airflow/dags:/opt/airflow/dags
+      - .:/opt/airflow/nba_project
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgres
+      - airflow-init
+    command: >
+      bash -c "
+        airflow scheduler &
+        airflow webserver
+      "
+    restart: unless-stopped
+
+volumes:
+  postgres_data:
