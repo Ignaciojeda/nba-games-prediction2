@@ -294,31 +294,6 @@ kedro jupyter notebook
 # Notebook de análisis específico
 kedro jupyter notebook --notebook-path notebooks/04_model_analysis.ipynb
 
-📁 Estructura del Proyecto
-
-nba-analysis/
-├── data/                   # Directorio de datos (seguido por DVC)
-│   ├── 01_raw/            # Datasets crudos
-│   ├── 02_intermediate/   # Datos procesados
-│   ├── 03_primary/        # Datos con ingeniería de características
-│   ├── 04_feature/        # Características para ML
-│   ├── 05_model_input/    # Datos listos para modelos
-│   ├── 06_models/         # Modelos entrenados
-│   └── 07_model_output/   # Predicciones
-│   └── 08_reporting/      # Reportes
-├── models/                 # Modelos serializados
-├── notebooks/              # Notebooks de análisis
-│   ├── 01_business_understanding.ipynb
-│   ├── 02_data_understanding.ipynb
-│   ├── 03_data_preparation.ipynb
-│   └── Modelos de regresion.ipynb
-│   └── Modelos_de_clasificacion.ipynb
-├── src/
-│   └── nba_analysis/      # Paquete del proyecto Kedro
-├── airflow/               # DAGs y configuración de Airflow
-├── docker-compose.yml    # Configuración de Docker
-└── requirements.txt      # Dependencias de Python
-
 🔧 Comandos Útiles
 Información del Proyecto
 
