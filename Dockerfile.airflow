@@ -1,0 +1,14 @@
+FROM apache/airflow:2.7.0-python3.9
+
+USER airflow
+
+# Copiar requirements específicos para Airflow (Python 3.8)
+COPY requirements-airflow.txt /tmp/requirements.txt
+
+# Instalar dependencias compatibles con Python 3.8
+RUN pip install --no-cache-dir -r /tmp/requirements.txt
+
+# Verificar instalación
+RUN python -c "import kedro; print('✅ Kedro instalado correctamente')"
+RUN python -c "import pandas; print('✅ Pandas instalado correctamente')"
+RUN python -c "import sklearn; print('✅ Scikit-learn instalado correctamente')"

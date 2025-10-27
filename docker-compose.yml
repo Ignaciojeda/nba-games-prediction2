@@ -5,10 +5,13 @@ services:
     volumes:
       - ./data:/app/data
       - ./conf:/app/conf
+      - ./models:/app/models
+      - ./logs:/app/logs
     ports:
       - "4141:4141"
     environment:
       - PYTHONPATH=/app
+      - KEDRO_ENV=docker
     command: kedro run
 
   kedro-viz:
@@ -16,7 +19,11 @@ services:
     container_name: nba-kedro-viz
     ports:
       - "4142:4141"
-    command: kedro viz --host 0.0.0.0
+    environment:
+      - KEDRO_ENV=docker
+    command: kedro viz --host 0.0.0.0 --port 4141
+    depends_on:
+      - kedro-app
 
   postgres:
     image: postgres:13
@@ -31,14 +38,18 @@ services:
       - postgres_data:/var/lib/postgresql/data
 
   airflow-init:
-    image: apache/airflow:2.7.0
+    build:
+      context: .
+      dockerfile: Dockerfile.airflow
     container_name: nba-airflow-init
     environment:
       - AIRFLOW__CORE__EXECUTOR=LocalExecutor
       - AIRFLOW__DATABASE__SQL_ALCHEMY_CONN=postgresql+psycopg2://airflow:airflow@postgres/airflow
       - AIRFLOW__CORE__LOAD_EXAMPLES=false
+      - AIRFLOW__CORE__DAGS_FOLDER=/opt/airflow/dags
     volumes:
       - ./airflow/dags:/opt/airflow/dags
+      - .:/opt/airflow/nba_project
     depends_on:
       - postgres
     command: >
@@ -49,7 +60,9 @@ services:
     restart: "no"
 
   airflow:
-    image: apache/airflow:2.7.0
+    build:
+      context: .
+      dockerfile: Dockerfile.airflow
     container_name: nba-airflow
     environment:
       - AIRFLOW__CORE__EXECUTOR=LocalExecutor
@@ -59,6 +72,7 @@ services:
     volumes:
       - ./airflow/dags:/opt/airflow/dags
       - .:/opt/airflow/nba_project
+      - ./logs:/opt/airflow/logs
     ports:
       - "8080:8080"
     depends_on:
