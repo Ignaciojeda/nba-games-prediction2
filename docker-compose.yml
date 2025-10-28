@@ -5,25 +5,21 @@ services:
     volumes:
       - ./data:/app/data
       - ./conf:/app/conf
-      - ./models:/app/models
-      - ./logs:/app/logs
-    ports:
-      - "4141:4141"
+      - .:/app
     environment:
       - PYTHONPATH=/app
-      - KEDRO_ENV=docker
-    command: kedro run
+    command: ["sleep", "infinity"]
+    # REMOVER: networks: - nba-network
 
   kedro-viz:
     build: .
     container_name: nba-kedro-viz
     ports:
       - "4142:4141"
-    environment:
-      - KEDRO_ENV=docker
-    command: kedro viz --host 0.0.0.0 --port 4141
+    command: kedro viz --host 0.0.0.0
     depends_on:
       - kedro-app
+    # REMOVER: networks: - nba-network
 
   postgres:
     image: postgres:13
@@ -36,17 +32,18 @@ services:
       - "5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
+    # REMOVER: networks: - nba-network
 
   airflow-init:
     build:
       context: .
       dockerfile: Dockerfile.airflow
     container_name: nba-airflow-init
+    user: "0:0"  # ← AGREGAR AQUÍ TAMBIÉN
     environment:
       - AIRFLOW__CORE__EXECUTOR=LocalExecutor
       - AIRFLOW__DATABASE__SQL_ALCHEMY_CONN=postgresql+psycopg2://airflow:airflow@postgres/airflow
       - AIRFLOW__CORE__LOAD_EXAMPLES=false
-      - AIRFLOW__CORE__DAGS_FOLDER=/opt/airflow/dags
     volumes:
       - ./airflow/dags:/opt/airflow/dags
       - .:/opt/airflow/nba_project
@@ -58,12 +55,14 @@ services:
         airflow users create --username admin --password admin --firstname Admin --lastname User --role Admin --email admin@example.com
       "
     restart: "no"
+    # REMOVER: networks: - nba-network
 
   airflow:
     build:
       context: .
       dockerfile: Dockerfile.airflow
     container_name: nba-airflow
+    user: "0:0"  # ← MANTENER ESTA LÍNEA
     environment:
       - AIRFLOW__CORE__EXECUTOR=LocalExecutor
       - AIRFLOW__DATABASE__SQL_ALCHEMY_CONN=postgresql+psycopg2://airflow:airflow@postgres/airflow
@@ -72,7 +71,6 @@ services:
     volumes:
       - ./airflow/dags:/opt/airflow/dags
       - .:/opt/airflow/nba_project
-      - ./logs:/opt/airflow/logs
     ports:
       - "8080:8080"
     depends_on:
@@ -84,6 +82,12 @@ services:
         airflow webserver
       "
     restart: unless-stopped
+    # REMOVER: networks: - nba-network
 
 volumes:
   postgres_data:
+
+# REMOVER ESTA SECCIÓN COMPLETA:
+# networks:
+#   nba-network:
+#     driver: bridge
