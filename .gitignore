@@ -1,44 +1,83 @@
-# Entornos virtuales
-venv/
-.nba_kedro_env/
-.env/
-.venv/
+# =============================================
+# KEDRO PROJECT (Evaluación Parcial 1 - Prioridad)
+# =============================================
+
+# Datos - NUNCA versionar datos reales
+data/
+!data/01_raw/.gitkeep
+!data/02_intermediate/.gitkeep
+!data/03_primary/.gitkeep
+!data/04_feature/.gitkeep
+!data/05_model_input/.gitkeep
+
+# Configuración local y credenciales
+conf/local/
+conf/**/credentials.yml
+conf/**/*credentials*
+
+# Logs
+*.log
+logs/
 
 # Cache de Python
 __pycache__/
-*.pyc
-*.pyo
-*.pyd
-.pytest_cache/
-.mypy_cache/
-
-# Ignorar archivos grandes generados
-data/08_reporting/*.pkl
-*.pkl
-
+*.py[cod]
+*$py.class
 
 # Jupyter
 .ipynb_checkpoints/
+*.ipynb
 
-# Logs
-logs/
-*.log
+# Entornos virtuales
+venv/
+env/
+.venv/
 
-# Sistema
+# =============================================
+# DVC (Evaluación Parcial 2)
+# =============================================
+.dvc/cache
+.dvc/tmp
+.dvc/state
+
+# =============================================
+# AIRFLOW (Evaluación Parcial 2)
+# =============================================
+airflow/logs/
+airflow.db
+airflow.cfg
+
+# =============================================
+# DOCKER (Evaluación Parcial 2)
+# =============================================
+docker-compose.override.yml
+
+# =============================================
+# SISTEMA Y IDEs
+# =============================================
 .DS_Store
 Thumbs.db
+.vscode/
+.idea/
+*.swp
+*.swo
 
-# Kedro (solo config local)
-conf/local/
+# =============================================
+# PYTEST
+# =============================================
+.pytest_cache/
+.coverage
+htmlcov/
 
-# DVC - IMPORTANTE: NO ignorar archivos .dvc
-# Los archivos .dvc DEBEN estar en Git
-# data/           # ¡CUIDADO! No ignorar toda la carpeta data/
+# =============================================
+# DOCUMENTACIÓN
+# =============================================
+docs/build/
+site/
 
-# En su lugar, ignorar solo datos temporales o cache
-data/02_intermediate/tmp/
-data/03_primary/tmp/
-data/06_models/tmp/
-
-# DVC storage (pero los archivos .dvc van en Git)
-dvc_storage/
+# =============================================
+# ARCHIVOS TEMPORALES
+# =============================================
+*.tmp
+*.temp
+.cache/
