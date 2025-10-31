@@ -4,11 +4,11 @@
 
 # Datos - NUNCA versionar datos reales
 data/
-!data/01_raw/.gitkeep
-!data/02_intermediate/.gitkeep
-!data/03_primary/.gitkeep
-!data/04_feature/.gitkeep
-!data/05_model_input/.gitkeep
+data/01_raw/
+data/02_intermediate/
+data/03_primary/
+data/04_feature/
+data/05_model_input/
 
 # Configuración local y credenciales
 conf/local/

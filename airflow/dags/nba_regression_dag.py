@@ -22,7 +22,7 @@ with DAG(
     data_prep_regression = BashOperator(
         task_id='data_prep_regression',
         # OPCIÓN A: Sin parámetros específicos
-        bash_command='cd /opt/airflow/nba_project && python -m kedro run --pipeline data_processing',
+        bash_command='cd /opt/airflow/nba_project && python -m kedro run --pipeline de',
         
         # OPCIÓN B: Con parámetros en formato correcto (si tu pipeline los soporta)
         # bash_command='cd /opt/airflow/nba_project && python -m kedro run --pipeline data_processing --params "model_type=regression"',
@@ -31,7 +31,7 @@ with DAG(
     # 2. Train Regression Models
     train_regression = BashOperator(
         task_id='train_regression_models',
-        bash_command='cd /opt/airflow/nba_project && python -m kedro run --pipeline regression_pipeline',
+        bash_command='cd /opt/airflow/nba_project && python -m kedro run --pipeline reg',
     )
 
     # 3. Version Results

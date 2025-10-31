@@ -21,19 +21,19 @@ with DAG(
     # 1. Data Processing
     data_processing = BashOperator(
         task_id='data_processing',
-        bash_command='cd /opt/airflow/nba_project && python -m kedro run --pipeline data_processing',
+        bash_command='cd /opt/airflow/nba_project && python -m kedro run --pipeline de',
     )
 
     # 2. Classification Models (Paralelo)
     classification_models = BashOperator(
         task_id='classification_models',
-        bash_command='cd /opt/airflow/nba_project && python -m kedro run --pipeline classification_pipeline',
+        bash_command='cd /opt/airflow/nba_project && python -m kedro run --pipeline clf',
     )
 
     # 3. Regression Models (Paralelo)
     regression_models = BashOperator(
         task_id='regression_models',
-        bash_command='cd /opt/airflow/nba_project && python -m kedro run --pipeline regression_pipeline',
+        bash_command='cd /opt/airflow/nba_project && python -m kedro run --pipeline reg',
     )
 
     # 4. DVC Versioning
