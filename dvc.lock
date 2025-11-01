@@ -1,0 +1,58 @@
+schema: '2.0'
+stages:
+  kedro_full_pipeline:
+    cmd: kedro run
+    deps:
+    - path: conf/
+      hash: md5
+      md5: 03d2754b9cd0dd82353884bab469e1e1.dir
+      size: 7879
+      nfiles: 3
+    - path: data/01_raw/games.csv
+      hash: md5
+      md5: a9ec1221d2e43b5179d45f0e3d8ec12c
+      size: 4108788
+    - path: data/01_raw/games_details.csv
+      hash: md5
+      md5: da7c797f172c1eedacc1513782c710c0
+      size: 93079494
+    - path: data/01_raw/teams.csv
+      hash: md5
+      md5: f98719a95df52602858e10100a4adc7d
+      size: 4063
+    - path: src/
+      hash: md5
+      md5: 59356c83d4fd17de6572ac518e29f901.dir
+      size: 47874
+      nfiles: 14
+    outs:
+    - path: data/02_intermediate/
+      hash: md5
+      md5: 0e7f2239682aa4520d1d385cfaf4b6d2.dir
+      size: 12418503
+      nfiles: 4
+    - path: data/03_primary/
+      hash: md5
+      md5: d52bf7729fd1e493bd21e19015166035.dir
+      size: 3978763
+      nfiles: 3
+    - path: data/04_feature/
+      hash: md5
+      md5: f1f70b23f9cb8a610d86e3998d1810bc.dir
+      size: 841068
+      nfiles: 2
+    - path: data/05_model_input/
+      hash: md5
+      md5: 2e506f0dfff670d79cc42cc0d46a027f.dir
+      size: 1792384
+      nfiles: 6
+    - path: data/06_models/
+      hash: md5
+      md5: fbfc88a7a13bd249cf8a8a8aed667d44.dir
+      size: 5080542
+      nfiles: 30
+    - path: data/08_reporting/
+      hash: md5
+      md5: a1d5887336ecbb227765cd6315512573.dir
+      size: 2314908185
+      nfiles: 32

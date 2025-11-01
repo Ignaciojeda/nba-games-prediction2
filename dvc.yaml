@@ -10,8 +10,8 @@ stages:
     outs:
       - data/02_intermediate/
       - data/03_primary/
-      - data/04_features/
+      - data/04_feature/
       - data/05_model_input/
-      - models/
+      - data/06_models/
     metrics:
-      - reports/
+      - data/08_reporting/

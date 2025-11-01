@@ -37,7 +37,7 @@ with DAG(
     # 3. Version Results
     version_regression = BashOperator(
         task_id='version_regression_results',
-        bash_command='cd /opt/airflow/nba_project && dvc commit && dvc push',
+        bash_command='cd /opt/airflow/nba_project && dvc commit --force && dvc push',
     )
 
     # Dependencies
