@@ -159,3 +159,28 @@ union_tablas:
   rename_columns:
     visitor_to_away: "AWAY_TEAM_ID"
     away_from: "VISITOR_TEAM_ID"
+
+# PARÁMETROS CLUSTERING (CORREGIR INDENTACIÓN - DEBE ESTAR AL MISMO NIVEL)
+clustering:
+  features:
+    - "PTS_home"
+    - "PTS_away"
+    - "FG_PCT_home"
+    - "FG_PCT_away"
+    - "FT_PCT_home"
+    - "FT_PCT_away"
+    - "FG3_PCT_home"
+    - "FG3_PCT_away"
+    - "REB_home"
+    - "REB_away"
+    - "AST_home"
+    - "AST_away"
+    - "STL_home"
+    - "STL_away"
+    - "BLK_home"
+    - "BLK_away"
+    - "TOV_home"
+    - "TOV_away"
+  max_k: 8
+  n_clusters: null
+  random_state: 42

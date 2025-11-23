@@ -106,3 +106,35 @@ model_report:
   type: kedro_datasets.json.JSONDataset
   filepath: data/08_reporting/model_report.json
   versioned: true
+
+# CLUSTERING DATASETS
+clustering_data:
+  type: pandas.CSVDataset
+  filepath: data/06_models/clustering_data.csv
+  save_args:
+    index: true
+
+clustering_results:
+  type: pickle.PickleDataset
+  filepath: data/06_models/clustering_results.pkl
+  versioned: true
+
+clustering_evaluation:
+  type: pickle.PickleDataset
+  filepath: data/06_models/clustering_evaluation.pkl
+  versioned: true
+
+cluster_interpretation_report:
+  type: pickle.PickleDataset
+  filepath: data/06_models/cluster_interpretation_report.pkl
+  versioned: true
+
+elbow_analysis_results:
+  type: pickle.PickleDataset
+  filepath: data/06_models/elbow_analysis_results.pkl
+  versioned: true
+
+silhouette_analysis_results:
+  type: pickle.PickleDataset
+  filepath: data/06_models/silhouette_analysis_results.pkl
+  versioned: true
