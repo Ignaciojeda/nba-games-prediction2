@@ -192,41 +192,50 @@ def create_game_level_features(games_clean: pd.DataFrame, team_features_base: pd
 
 def prepare_model_inputs(game_level_features: pd.DataFrame, parameters: Dict) -> Tuple[pd.DataFrame, pd.DataFrame]:
     """
-    Preparar datasets para modelado de clasificación y regresión.
-    
-    Args:
-        game_level_features: DataFrame con features a nivel de partido
-        parameters: Parámetros de configuración
-        
-    Returns:
-        Tuple con datasets para clasificación y regresión
+    Preparar datasets para modelado de clasificación y regresión - CORREGIDO para incluir IDs de equipo
     """
-    logger.info("Preparando inputs para modelado")
+    logger.info("Preparando inputs para modelado con IDs de equipo")
     
     # Usar parámetros para seleccionar features
-    feature_columns = parameters.get("features_clasificacion", [
+    classification_features = parameters.get("classification_features", [
         'PTS_home', 'PTS_away', 'FG_PCT_home', 'FG_PCT_away',
         'FT_PCT_home', 'FT_PCT_away', 'FG3_PCT_home', 'FG3_PCT_away',
         'REB_home', 'REB_away', 'AST_home', 'AST_away',
         'HOME_HIST_HOME_WIN_PCT', 'AWAY_HIST_AWAY_WIN_PCT', 'WIN_PCT_DIFF'
     ])
     
-    classification_target = parameters.get("target_clasificacion", "HOME_TEAM_WINS")
-    regression_target = "POINT_DIFFERENTIAL"
+    regression_features = parameters.get("regression_features", [
+        'FG_PCT_home', 'FT_PCT_home', 'FG3_PCT_home', 'AST_home', 'REB_home',
+        'FG_PCT_away', 'FT_PCT_away', 'FG3_PCT_away', 'AST_away', 'REB_away',
+        'YEAR', 'MONTH'
+    ])
+    
+    classification_target = parameters.get("classification_target", "HOME_TEAM_WINS")
+    regression_targets = parameters.get("regression_targets", {
+        "local_strength": "PTS_home",
+        "away_weakness": "PTS_away", 
+        "point_differential": "POINT_DIFFERENTIAL"
+    })
+    
+    # Asegurar que los IDs de equipo estén incluidos en ambos conjuntos
+    essential_team_ids = ['HOME_TEAM_ID', 'VISITOR_TEAM_ID']
     
     # Filtrar columnas existentes
-    available_features = [col for col in feature_columns if col in game_level_features.columns]
+    available_classification_features = [col for col in classification_features if col in game_level_features.columns]
+    available_regression_features = [col for col in regression_features if col in game_level_features.columns]
     
-    # Dataset para clasificación
-    classification_data = game_level_features[available_features + [classification_target]].copy()
+    # Dataset para clasificación - INCLUIR IDs de equipo
+    classification_data = game_level_features[essential_team_ids + available_classification_features + [classification_target]].copy()
     classification_data = classification_data.dropna()
     
-    # Dataset para regresión
-    regression_data = game_level_features[available_features + [regression_target]].copy()
+    # Dataset para regresión - INCLUIR IDs de equipo
+    regression_data = game_level_features[essential_team_ids + available_regression_features + list(regression_targets.values())].copy()
     regression_data = regression_data.dropna()
     
     logger.info(f"Dataset clasificación: {classification_data.shape}")
     logger.info(f"Dataset regresión: {regression_data.shape}")
+    logger.info(f"IDs de equipo incluidos en classification: {essential_team_ids}")
+    logger.info(f"IDs de equipo incluidos en regression: {essential_team_ids}")
     
     return classification_data, regression_data
 
@@ -256,6 +265,13 @@ def validate_data_quality(games_clean: pd.DataFrame,
         pd.api.types.is_datetime64_any_dtype(games_clean['GAME_DATE_EST'])
     ]))
     
+    # Validar que las columnas esenciales existen
+    validation_results['essential_columns_exist'] = int(all([
+        'HOME_TEAM_ID' in game_level_features.columns,
+        'VISITOR_TEAM_ID' in game_level_features.columns,
+        'POINT_DIFFERENTIAL' in game_level_features.columns
+    ]))
+    
     # Agregar estadísticas adicionales para el reporte
     validation_results['summary'] = {
         'total_games': len(games_clean),
@@ -268,7 +284,8 @@ def validate_data_quality(games_clean: pd.DataFrame,
             validation_results['games_not_empty'],
             validation_results['team_features_not_empty'],
             validation_results['game_features_not_empty'],
-            validation_results['correct_dtypes']
+            validation_results['correct_dtypes'],
+            validation_results['essential_columns_exist']
         ])
     }
     
@@ -320,6 +337,14 @@ def create_eda_visualizations(games_clean: pd.DataFrame) -> Dict[str, plt.Figure
     sns.heatmap(correlation_matrix, annot=True, cmap='coolwarm', center=0, fmt='.2f', ax=ax3)
     ax3.set_title("Matriz de Correlación - Variables Numéricas")
     figures["correlation_matrix"] = fig3
+    
+    # 4. Distribución del diferencial de puntos
+    fig4, ax4 = plt.subplots(figsize=(12, 6))
+    games_clean['POINT_DIFFERENTIAL'].hist(bins=50, ax=ax4, color='purple', alpha=0.7)
+    ax4.set_title('Distribución del Diferencial de Puntos')
+    ax4.set_xlabel('Diferencial de Puntos')
+    ax4.set_ylabel('Frecuencia')
+    figures["point_differential"] = fig4
     
     logger.info(f"Visualizaciones EDA creadas: {len(figures)} figuras")
     return figures

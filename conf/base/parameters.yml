@@ -19,9 +19,9 @@ required_game_cols:
   - PTS_away
   - HOME_TEAM_WINS
 
-# PARÁMETROS DATA ENGINEERING (NUEVA SECCIÓN)
+# PARÁMETROS DATA ENGINEERING
 data_engineering:
-  features_clasificacion:
+  classification_features:
     - 'PTS_home'
     - 'PTS_away' 
     - 'FG_PCT_home'
@@ -37,7 +37,24 @@ data_engineering:
     - 'HOME_HIST_HOME_WIN_PCT'
     - 'AWAY_HIST_AWAY_WIN_PCT'
     - 'WIN_PCT_DIFF'
-  target_clasificacion: 'HOME_TEAM_WINS'
+  regression_features:
+    - 'FG_PCT_home'
+    - 'FT_PCT_home'
+    - 'FG3_PCT_home'
+    - 'AST_home'
+    - 'REB_home'
+    - 'FG_PCT_away'
+    - 'FT_PCT_away'
+    - 'FG3_PCT_away'
+    - 'AST_away'
+    - 'REB_away'
+    - 'YEAR'
+    - 'MONTH'
+  classification_target: 'HOME_TEAM_WINS'
+  regression_targets:
+    local_strength: 'PTS_home'
+    away_weakness: 'PTS_away'
+    point_differential: 'POINT_DIFFERENTIAL'
 
 # PARÁMETROS MODELOS CLASIFICACIÓN
 classification_models:
@@ -106,22 +123,19 @@ regression:
     away_weakness: 'PTS_away'
     point_differential: 'POINT_DIFFERENTIAL'
   team_identifiers:
-    - 'TEAM_ABBREVIATION'
-    - 'TEAM_ID'
+    - 'HOME_TEAM_ID'
+    - 'VISITOR_TEAM_ID'
   sample_size: 10000
   cv_folds: 5
   test_size: 0.2
   random_state: 42
   gridsearch_params:
     random_forest:
-      model__n_estimators: [100, 200]
-      model__max_depth: [10, 20]
+      model__n_estimators: [50, 100]
+      model__max_depth: [3, 5, None]
     gradient_boosting:
-      model__n_estimators: [100, 200]
-      model__learning_rate: [0.1, 0.01]
-    svr:
-      model__C: [0.1, 1.0]
-      model__kernel: ['rbf', 'linear']
+      model__n_estimators: [50, 100]
+      model__learning_rate: [0.01, 0.1]
     ridge:
       model__alpha: [0.1, 1.0, 10.0]
     lasso:
@@ -129,8 +143,6 @@ regression:
     elastic_net:
       model__alpha: [0.1, 1.0]
       model__l1_ratio: [0.2, 0.5, 0.8]
-    knn:
-      model__n_neighbors: [3, 5, 7]
 
 # Configuración para manejo de missing values
 data_preparation:
@@ -160,31 +172,37 @@ union_tablas:
     visitor_to_away: "AWAY_TEAM_ID"
     away_from: "VISITOR_TEAM_ID"
 
-# PARÁMETROS CLUSTERING (CORREGIR INDENTACIÓN - DEBE ESTAR AL MISMO NIVEL)
+# PARÁMETROS CLUSTERING
 clustering:
   features:
-    - "PTS_home"
-    - "PTS_away"
-    - "FG_PCT_home"
-    - "FG_PCT_away"
-    - "FT_PCT_home"
-    - "FT_PCT_away"
-    - "FG3_PCT_home"
-    - "FG3_PCT_away"
-    - "REB_home"
-    - "REB_away"
-    - "AST_home"
-    - "AST_away"
-    - "STL_home"
-    - "STL_away"
-    - "BLK_home"
-    - "BLK_away"
-    - "TOV_home"
-    - "TOV_away"
-  max_k: 8
+    - "HOME_PTS_MEAN"
+    - "HOME_PTS_STD"
+    - "HOME_GAMES_COUNT"
+    - "HOME_FG_PCT"
+    - "HOME_FT_PCT"
+    - "HOME_FG3_PCT"
+    - "HOME_REB_MEAN"
+    - "HOME_AST_MEAN"
+    - "HOME_WIN_PCT"
+    - "HOME_PT_DIFF_MEAN"
+    - "AWAY_PTS_MEAN"
+    - "AWAY_PTS_STD"
+    - "AWAY_GAMES_COUNT"
+    - "AWAY_FG_PCT"
+    - "AWAY_FT_PCT"
+    - "AWAY_FG3_PCT"
+    - "AWAY_REB_MEAN"
+    - "AWAY_AST_MEAN"
+    - "AWAY_WIN_PCT"
+    - "AWAY_PT_DIFF_MEAN"
+    - "HOME_ADVANTAGE_PTS"
+    - "HOME_ADVANTAGE_WIN"
+    - "HOME_ADVANTAGE_REB"
+  max_k: 10
   n_clusters: null
   random_state: 42
 
+# PARÁMETROS REDUCCIÓN DE DIMENSIONALIDAD
 dimensionality_reduction:
   pca_n_components: 10
   tsne_n_components: 2
@@ -194,9 +212,55 @@ dimensionality_reduction:
   umap_min_dist: 0.1
   random_state: 42
 
+# PARÁMETROS DETECCIÓN DE ANOMALÍAS
 anomaly_detection:
   contamination: 0.1
   n_estimators: 100
   n_neighbors: 20
   kernel: "rbf"
   random_state: 42
+
+# PARÁMETROS REGLAS DE ASOCIACIÓN (OPCIONAL)
+association_rules:
+  min_support: 0.01
+  min_confidence: 0.5
+  min_lift: 1.0
+  max_length: 3
+
+# PARÁMETROS VISUALIZACIÓN
+visualization:
+  figure_size: [12, 8]
+  color_palette: "viridis"
+  style: "whitegrid"
+  dpi: 300
+
+# PARÁMETROS EVALUACIÓN DE MODELOS
+model_evaluation:
+  classification_metrics:
+    - "accuracy"
+    - "precision"
+    - "recall"
+    - "f1"
+    - "roc_auc"
+  regression_metrics:
+    - "r2"
+    - "mae"
+    - "mse"
+    - "rmse"
+  clustering_metrics:
+    - "silhouette_score"
+    - "calinski_harabasz_score"
+    - "davies_bouldin_score"
+
+# PARÁMETROS OPTIMIZACIÓN
+optimization:
+  n_trials: 100
+  timeout: 3600
+  direction: "maximize"
+
+# PARÁMETROS DESPLIEGUE
+deployment:
+  model_format: "pickle"
+  api_timeout: 30
+  batch_size: 1000
+  monitoring_window: 10000
