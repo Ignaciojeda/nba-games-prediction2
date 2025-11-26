@@ -2,3 +2,14 @@
     remote = local_storage
 ['remote "local_storage"']
     url = ../dvc_storage
+
+metrics:
+  - reports/clustering_metrics.json
+  - reports/dimensionality_metrics.json
+  - reports/anomaly_metrics.json
+  - reports/integrated_model_metrics.json
+
+plots:
+  - reports/confusion_matrix.png
+  - reports/pca_variance.png
+  - reports/cluster_visualization.png

@@ -1,7 +1,7 @@
 [
   {
     "event": "before_pipeline_run",
-    "timestamp": "2025-11-24T20:05:22.794479+00:00"
+    "timestamp": "2025-11-26T16:38:22.757512+00:00"
   },
   {
     "event": "after_dataset_loaded",
@@ -14,7 +14,7 @@
     "event": "after_node_run",
     "node": "clean_games_data_node",
     "node_id": "cbd61b22",
-    "duration": 0.02861379999999958,
+    "duration": 0.037629899999998884,
     "status": "success"
   },
   {
@@ -35,7 +35,7 @@
     "event": "after_node_run",
     "node": "clean_games_details_node",
     "node_id": "0e54f0de",
-    "duration": 0.4696726,
+    "duration": 0.6281804999999991,
     "status": "success"
   },
   {
@@ -56,7 +56,7 @@
     "event": "after_node_run",
     "node": "clean_teams_data_node",
     "node_id": "19079502",
-    "duration": 0.007695599999999914,
+    "duration": 0.014209000000001026,
     "status": "success"
   },
   {
@@ -77,7 +77,7 @@
     "event": "after_node_run",
     "node": "handle_missing_values_node",
     "node_id": "fb073b62",
-    "duration": 0.03327120000000061,
+    "duration": 0.05409429999999915,
     "status": "success"
   },
   {
@@ -98,7 +98,7 @@
     "event": "after_node_run",
     "node": "create_eda_visualizations_node",
     "node_id": "acc7e326",
-    "duration": 1.5774787999999997,
+    "duration": 1.9746298000000024,
     "status": "success"
   },
   {
@@ -133,7 +133,7 @@
     "event": "after_node_run",
     "node": "create_games_teams_details_node",
     "node_id": "a0075c71",
-    "duration": 0.37071849999999884,
+    "duration": 0.3654556999999983,
     "status": "success"
   },
   {
@@ -161,7 +161,7 @@
     "event": "after_node_run",
     "node": "create_team_features_base_node",
     "node_id": "6ce54654",
-    "duration": 0.11034940000000049,
+    "duration": 0.10963350000000105,
     "status": "success"
   },
   {
@@ -189,7 +189,7 @@
     "event": "after_node_run",
     "node": "create_game_level_features_node",
     "node_id": "83c8f530",
-    "duration": 0.04660019999999854,
+    "duration": 0.04731899999999811,
     "status": "success"
   },
   {
@@ -217,7 +217,7 @@
     "event": "after_node_run",
     "node": "prepare_clustering_data_node",
     "node_id": "667ac66b",
-    "duration": 0.024111500000000063,
+    "duration": 0.022193800000000152,
     "status": "success"
   },
   {
@@ -245,7 +245,7 @@
     "event": "after_node_run",
     "node": "prepare_regression_data_node",
     "node_id": "3e7de558",
-    "duration": 0.015321300000000093,
+    "duration": 0.015778600000000864,
     "status": "success"
   },
   {
@@ -273,7 +273,7 @@
     "event": "after_node_run",
     "node": "elbow_analysis_node",
     "node_id": "01756c4e",
-    "duration": 2.2399079000000004,
+    "duration": 2.3522361000000025,
     "status": "success"
   },
   {
@@ -282,6 +282,118 @@
     "node_id": "3e8ce962",
     "status": "Available",
     "size": 4096
+  },
+  {
+    "event": "after_dataset_loaded",
+    "dataset": "clustering_data",
+    "node_id": "fff1c77c",
+    "status": "Available",
+    "size": 297245
+  },
+  {
+    "event": "after_dataset_loaded",
+    "dataset": "params:anomaly_detection",
+    "node_id": "e1a8af54",
+    "status": "Available",
+    "size": 0
+  },
+  {
+    "event": "after_node_run",
+    "node": "isolation_forest_anomalies_node",
+    "node_id": "e5f02822",
+    "duration": 0.24566409999999905,
+    "status": "success"
+  },
+  {
+    "event": "after_dataset_saved",
+    "dataset": "isolation_forest_anomalies",
+    "node_id": "e9015e02",
+    "status": "Available",
+    "size": 1211388
+  },
+  {
+    "event": "after_dataset_loaded",
+    "dataset": "clustering_data",
+    "node_id": "fff1c77c",
+    "status": "Available",
+    "size": 297245
+  },
+  {
+    "event": "after_dataset_loaded",
+    "dataset": "params:anomaly_detection",
+    "node_id": "e1a8af54",
+    "status": "Available",
+    "size": 0
+  },
+  {
+    "event": "after_node_run",
+    "node": "lof_anomalies_node",
+    "node_id": "cc4059fb",
+    "duration": 0.03200530000000157,
+    "status": "success"
+  },
+  {
+    "event": "after_dataset_saved",
+    "dataset": "lof_anomalies",
+    "node_id": "9fcd02cb",
+    "status": "Available",
+    "size": 238947
+  },
+  {
+    "event": "after_dataset_loaded",
+    "dataset": "clustering_data",
+    "node_id": "fff1c77c",
+    "status": "Available",
+    "size": 297245
+  },
+  {
+    "event": "after_dataset_loaded",
+    "dataset": "params:anomaly_detection",
+    "node_id": "e1a8af54",
+    "status": "Available",
+    "size": 0
+  },
+  {
+    "event": "after_node_run",
+    "node": "one_class_svm_anomalies_node",
+    "node_id": "fd56338b",
+    "duration": 0.03926759999999874,
+    "status": "success"
+  },
+  {
+    "event": "after_dataset_saved",
+    "dataset": "one_class_svm_anomalies",
+    "node_id": "90bcb6fb",
+    "status": "Available",
+    "size": 30130
+  },
+  {
+    "event": "after_dataset_loaded",
+    "dataset": "clustering_data",
+    "node_id": "fff1c77c",
+    "status": "Available",
+    "size": 297245
+  },
+  {
+    "event": "after_dataset_loaded",
+    "dataset": "params:dimensionality_reduction",
+    "node_id": "b6fb69e5",
+    "status": "Available",
+    "size": 0
+  },
+  {
+    "event": "after_node_run",
+    "node": "pca_analysis_node",
+    "node_id": "705e8bc7",
+    "duration": 0.02371790000000118,
+    "status": "success"
+  },
+  {
+    "event": "after_dataset_saved",
+    "dataset": "pca_results",
+    "node_id": "c5fa2d8c",
+    "status": "Available",
+    "size": 56559
   },
   {
     "event": "after_dataset_loaded",
@@ -301,7 +413,7 @@
     "event": "after_node_run",
     "node": "prepare_model_inputs_node",
     "node_id": "c2b01e62",
-    "duration": 0.020862099999998662,
+    "duration": 0.016308300000002163,
     "status": "success"
   },
   {
@@ -336,7 +448,7 @@
     "event": "after_node_run",
     "node": "silhouette_analysis_node",
     "node_id": "2107f360",
-    "duration": 0.4402362000000011,
+    "duration": 0.5334854,
     "status": "success"
   },
   {
@@ -364,7 +476,7 @@
     "event": "after_node_run",
     "node": "train_away_weakness_model_node",
     "node_id": "0d72584a",
-    "duration": 107.1934625,
+    "duration": 57.9177918,
     "status": "success"
   },
   {
@@ -399,7 +511,7 @@
     "event": "after_node_run",
     "node": "train_local_strength_model_node",
     "node_id": "6614729d",
-    "duration": 65.50391200000001,
+    "duration": 53.989305,
     "status": "success"
   },
   {
@@ -434,7 +546,7 @@
     "event": "after_node_run",
     "node": "train_point_differential_model_node",
     "node_id": "42a8c03e",
-    "duration": 63.21636370000002,
+    "duration": 60.3042514,
     "status": "success"
   },
   {
@@ -450,6 +562,62 @@
     "node_id": "ba5a86a5",
     "status": "Available",
     "size": 4096
+  },
+  {
+    "event": "after_dataset_loaded",
+    "dataset": "clustering_data",
+    "node_id": "fff1c77c",
+    "status": "Available",
+    "size": 297245
+  },
+  {
+    "event": "after_dataset_loaded",
+    "dataset": "params:dimensionality_reduction",
+    "node_id": "b6fb69e5",
+    "status": "Available",
+    "size": 0
+  },
+  {
+    "event": "after_node_run",
+    "node": "tsne_analysis_node",
+    "node_id": "8f8944df",
+    "duration": 1.8446050000000014,
+    "status": "success"
+  },
+  {
+    "event": "after_dataset_saved",
+    "dataset": "tsne_results",
+    "node_id": "6c6aeb79",
+    "status": "Available",
+    "size": 12247
+  },
+  {
+    "event": "after_dataset_loaded",
+    "dataset": "clustering_data",
+    "node_id": "fff1c77c",
+    "status": "Available",
+    "size": 297245
+  },
+  {
+    "event": "after_dataset_loaded",
+    "dataset": "params:dimensionality_reduction",
+    "node_id": "b6fb69e5",
+    "status": "Available",
+    "size": 0
+  },
+  {
+    "event": "after_node_run",
+    "node": "umap_analysis_node",
+    "node_id": "d84956fe",
+    "duration": 9.864741900000013,
+    "status": "success"
+  },
+  {
+    "event": "after_dataset_saved",
+    "dataset": "umap_results",
+    "node_id": "c1c6de31",
+    "status": "Available",
+    "size": 182358
   },
   {
     "event": "after_dataset_loaded",
@@ -476,7 +644,7 @@
     "event": "after_node_run",
     "node": "validate_data_quality_node",
     "node_id": "6b749fb7",
-    "duration": 0.03252200000000016,
+    "duration": 0.031849100000016506,
     "status": "success"
   },
   {
@@ -485,6 +653,48 @@
     "node_id": "d599a80d",
     "status": "Available",
     "size": 343
+  },
+  {
+    "event": "after_dataset_loaded",
+    "dataset": "isolation_forest_anomalies",
+    "node_id": "e9015e02",
+    "status": "Available",
+    "size": 1211388
+  },
+  {
+    "event": "after_dataset_loaded",
+    "dataset": "lof_anomalies",
+    "node_id": "9fcd02cb",
+    "status": "Available",
+    "size": 238947
+  },
+  {
+    "event": "after_dataset_loaded",
+    "dataset": "one_class_svm_anomalies",
+    "node_id": "90bcb6fb",
+    "status": "Available",
+    "size": 30130
+  },
+  {
+    "event": "after_dataset_loaded",
+    "dataset": "team_features_base",
+    "node_id": "8c509381",
+    "status": "Available",
+    "size": 121400
+  },
+  {
+    "event": "after_node_run",
+    "node": "analyze_anomalies_node",
+    "node_id": "58baa9fa",
+    "duration": 0.00753700000001345,
+    "status": "success"
+  },
+  {
+    "event": "after_dataset_saved",
+    "dataset": "anomaly_analysis_report",
+    "node_id": "aa8abd78",
+    "status": "Available",
+    "size": 1458
   },
   {
     "event": "after_dataset_loaded",
@@ -518,7 +728,7 @@
     "event": "after_node_run",
     "node": "create_model_report_node",
     "node_id": "46ba8d17",
-    "duration": 0.004041400000005524,
+    "duration": 0.004433400000010579,
     "status": "success"
   },
   {
@@ -527,6 +737,104 @@
     "node_id": "423ce24c",
     "status": "Available",
     "size": 4096
+  },
+  {
+    "event": "after_dataset_loaded",
+    "dataset": "pca_results",
+    "node_id": "c5fa2d8c",
+    "status": "Available",
+    "size": 56559
+  },
+  {
+    "event": "after_dataset_loaded",
+    "dataset": "tsne_results",
+    "node_id": "6c6aeb79",
+    "status": "Available",
+    "size": 12247
+  },
+  {
+    "event": "after_dataset_loaded",
+    "dataset": "umap_results",
+    "node_id": "c1c6de31",
+    "status": "Available",
+    "size": 182358
+  },
+  {
+    "event": "after_node_run",
+    "node": "dimensionality_comparison_node",
+    "node_id": "8b55faa4",
+    "duration": 0.005295499999988351,
+    "status": "success"
+  },
+  {
+    "event": "after_dataset_saved",
+    "dataset": "dimensionality_comparison",
+    "node_id": "28bcd383",
+    "status": "Available",
+    "size": 587
+  },
+  {
+    "event": "after_dataset_loaded",
+    "dataset": "isolation_forest_anomalies",
+    "node_id": "e9015e02",
+    "status": "Available",
+    "size": 1211388
+  },
+  {
+    "event": "after_dataset_loaded",
+    "dataset": "team_features_base",
+    "node_id": "8c509381",
+    "status": "Available",
+    "size": 121400
+  },
+  {
+    "event": "after_node_run",
+    "node": "integrate_anomaly_scores_node",
+    "node_id": "fa83c4a9",
+    "duration": 0.007412300000027017,
+    "status": "success"
+  },
+  {
+    "event": "after_dataset_saved",
+    "dataset": "features_with_anomaly_scores",
+    "node_id": "e84a90b5",
+    "status": "Available",
+    "size": 134429
+  },
+  {
+    "event": "after_dataset_loaded",
+    "dataset": "pca_results",
+    "node_id": "c5fa2d8c",
+    "status": "Available",
+    "size": 56559
+  },
+  {
+    "event": "after_dataset_loaded",
+    "dataset": "team_features_base",
+    "node_id": "8c509381",
+    "status": "Available",
+    "size": 121400
+  },
+  {
+    "event": "after_dataset_loaded",
+    "dataset": "params:dimensionality_reduction",
+    "node_id": "b6fb69e5",
+    "status": "Available",
+    "size": 0
+  },
+  {
+    "event": "after_node_run",
+    "node": "integrate_dimensionality_features_node",
+    "node_id": "e9a084ac",
+    "duration": 0.007459800000020778,
+    "status": "success"
+  },
+  {
+    "event": "after_dataset_saved",
+    "dataset": "enhanced_features_with_pca",
+    "node_id": "7d83c368",
+    "status": "Available",
+    "size": 182791
   },
   {
     "event": "after_dataset_loaded",
@@ -539,7 +847,7 @@
     "event": "after_node_run",
     "node": "prepare_classification_data_node",
     "node_id": "aeba6395",
-    "duration": 0.03223769999999604,
+    "duration": 0.04636399999998275,
     "status": "success"
   },
   {
@@ -602,7 +910,7 @@
     "event": "after_node_run",
     "node": "team_segmentation_node",
     "node_id": "382dabb6",
-    "duration": 0.148182300000002,
+    "duration": 0.1373480000000029,
     "status": "success"
   },
   {
@@ -637,7 +945,7 @@
     "event": "after_node_run",
     "node": "evaluate_clustering_models_node",
     "node_id": "7a1a2fa4",
-    "duration": 0.047256000000004406,
+    "duration": 0.05868789999999535,
     "status": "success"
   },
   {
@@ -672,7 +980,7 @@
     "event": "after_node_run",
     "node": "train_classification_models_node",
     "node_id": "392d6870",
-    "duration": 274.4265176,
+    "duration": 208.0768446,
     "status": "success"
   },
   {
@@ -714,7 +1022,7 @@
     "event": "after_node_run",
     "node": "evaluate_classification_models_node",
     "node_id": "ba10bc45",
-    "duration": 0.5849514999999883,
+    "duration": 0.5744416000000001,
     "status": "success"
   },
   {
@@ -756,7 +1064,7 @@
     "event": "after_node_run",
     "node": "interpret_clusters_node",
     "node_id": "4e7c9418",
-    "duration": 0.08762320000005275,
+    "duration": 0.08064940000002707,
     "status": "success"
   },
   {
@@ -798,7 +1106,7 @@
     "event": "after_node_run",
     "node": "analyze_best_model_node",
     "node_id": "8d825ac6",
-    "duration": 0.008279399999992165,
+    "duration": 0.007366100000012921,
     "status": "success"
   },
   {
@@ -847,7 +1155,7 @@
     "event": "after_node_run",
     "node": "save_classification_results_node",
     "node_id": "19300359",
-    "duration": 0.005201899999974557,
+    "duration": 0.0054454000000419,
     "status": "success"
   },
   {
@@ -880,6 +1188,6 @@
   },
   {
     "event": "after_pipeline_run",
-    "timestamp": "2025-11-24T20:14:05.456465+00:00"
+    "timestamp": "2025-11-26T16:45:09.294253+00:00"
   }
 ]

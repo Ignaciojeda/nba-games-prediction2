@@ -237,3 +237,46 @@ def save_classification_results(trained_models: Dict, evaluation_results: Dict,
     logger.info("✅ Resultados de clasificación guardados")
     
     return classification_report, best_model, scaler, feature_importance
+
+def enhance_classification_features_with_clusters(classification_data: pd.DataFrame, 
+                                                clustering_results: Dict,
+                                                dimensionality_results: Dict) -> pd.DataFrame:
+    """Mejorar features de clasificación con información de clusters y PCA."""
+    
+    enhanced_data = classification_data.copy()
+    
+    # Obtener el mejor algoritmo de clustering
+    best_algo = clustering_results.get('best_algorithm', 'kmeans')
+    cluster_labels = clustering_results[best_algo]['labels']
+    
+    # Agregar cluster como feature
+    enhanced_data['TEAM_CLUSTER'] = cluster_labels[:len(enhanced_data)]
+    
+    # Agregar componentes principales si están disponibles
+    if 'principal_components' in dimensionality_results:
+        pca_components = dimensionality_results['principal_components']
+        # Unir componentes principales relevantes
+        for i, col in enumerate(pca_components.columns[:3]):  # Primeros 3 componentes
+            enhanced_data[f'PCA_{i+1}'] = pca_components[col].values[:len(enhanced_data)]
+    
+    return enhanced_data
+
+def enhance_classification_with_clusters(classification_data: pd.DataFrame,
+                                       clustering_results: Dict,
+                                       pca_results: Dict) -> pd.DataFrame:
+    """Mejorar datos de clasificación con clusters y PCA."""
+    
+    enhanced_data = classification_data.copy()
+    
+    # Agregar cluster
+    best_algo = clustering_results.get('best_algorithm', 'kmeans')
+    cluster_labels = clustering_results[best_algo]['labels']
+    enhanced_data['TEAM_CLUSTER'] = cluster_labels[:len(enhanced_data)]
+    
+    # Agregar componentes PCA principales
+    if 'principal_components' in pca_results:
+        pca_df = pca_results['principal_components']
+        for i in range(min(3, len(pca_df.columns))):
+            enhanced_data[f'PCA_{i+1}'] = pca_df.iloc[:len(enhanced_data), i]
+    
+    return enhanced_data

@@ -234,3 +234,44 @@ def create_model_report(local_results: Dict, away_results: Dict,
     
     logger.info("Reporte de modelos creado exitosamente")
     return report
+
+def enhance_regression_features_with_clusters(regression_data: pd.DataFrame,
+                                            clustering_results: Dict,
+                                            dimensionality_results: Dict) -> pd.DataFrame:
+    """Mejorar features de regresión con información de clusters y PCA."""
+    
+    enhanced_data = regression_data.copy()
+    
+    # Obtener el mejor algoritmo de clustering
+    best_algo = clustering_results.get('best_algorithm', 'kmeans')
+    cluster_labels = clustering_results[best_algo]['labels']
+    
+    # Agregar cluster como feature
+    enhanced_data['TEAM_CLUSTER'] = cluster_labels[:len(enhanced_data)]
+    
+    # Agregar métricas de cluster
+    cluster_stats = _calculate_cluster_statistics(clustering_results, regression_data)
+    enhanced_data = enhanced_data.merge(cluster_stats, on='TEAM_CLUSTER', how='left')
+    
+    return enhanced_data
+
+def _calculate_cluster_statistics(clustering_results: Dict, regression_data: pd.DataFrame) -> pd.DataFrame:
+    """Calcular estadísticas por cluster para usar como features."""
+    # Implementar cálculo de estadísticas por cluster
+    pass
+
+def enhance_regression_with_clusters(regression_data: pd.DataFrame, 
+                                   clustering_results: Dict,
+                                   team_features_base: pd.DataFrame) -> pd.DataFrame:
+    """Mejorar datos de regresión con información de clusters."""
+    
+    enhanced_data = regression_data.copy()
+    
+    # Obtener clusters del mejor algoritmo
+    best_algo = clustering_results.get('best_algorithm', 'kmeans')
+    cluster_labels = clustering_results[best_algo]['labels']
+    
+    # Agregar cluster como feature
+    enhanced_data['TEAM_CLUSTER'] = cluster_labels[:len(enhanced_data)]
+    
+    return enhanced_data

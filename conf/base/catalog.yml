@@ -138,3 +138,45 @@ silhouette_analysis_results:
   type: pickle.PickleDataset
   filepath: data/06_models/silhouette_analysis_results.pkl
   versioned: true
+
+# Dimensionality Reduction outputs
+pca_results:
+  type: pickle.PickleDataset
+  filepath: data/06_models/pca_results.pkl
+
+tsne_results:
+  type: pickle.PickleDataset  
+  filepath: data/06_models/tsne_results.pkl
+
+umap_results:
+  type: pickle.PickleDataset
+  filepath: data/06_models/umap_results.pkl
+
+dimensionality_comparison:
+  type: pickle.PickleDataset
+  filepath: data/06_models/dimensionality_comparison.pkl
+
+enhanced_features_with_pca:
+  type: pandas.ParquetDataset
+  filepath: data/03_primary/enhanced_features_with_pca.parquet
+
+# Anomaly Detection outputs
+isolation_forest_anomalies:
+  type: pickle.PickleDataset
+  filepath: data/06_models/isolation_forest_anomalies.pkl
+
+lof_anomalies:
+  type: pickle.PickleDataset
+  filepath: data/06_models/lof_anomalies.pkl
+
+one_class_svm_anomalies:
+  type: pickle.PickleDataset
+  filepath: data/06_models/one_class_svm_anomalies.pkl
+
+anomaly_analysis_report:
+  type: pickle.PickleDataset
+  filepath: data/06_models/anomaly_analysis_report.pkl
+
+features_with_anomaly_scores:
+  type: pandas.ParquetDataset
+  filepath: data/03_primary/features_with_anomaly_scores.parquet

@@ -184,3 +184,19 @@ clustering:
   max_k: 8
   n_clusters: null
   random_state: 42
+
+dimensionality_reduction:
+  pca_n_components: 10
+  tsne_n_components: 2
+  tsne_perplexity: 30
+  umap_n_components: 2
+  umap_n_neighbors: 15
+  umap_min_dist: 0.1
+  random_state: 42
+
+anomaly_detection:
+  contamination: 0.1
+  n_estimators: 100
+  n_neighbors: 20
+  kernel: "rbf"
+  random_state: 42
