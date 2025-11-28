@@ -81,6 +81,67 @@ MAE (Error Absoluto Medio)
 
 Puntuación R²
 
+
+Integración de Clustering 
+
+Clasificación: 36 nuevas features agregadas (de 17 a 53 features totales)
+
+Regresión: 21 nuevas features agregadas (de 17 a 38 features totales)
+
+Clusters encontrados: 2 clusters con silhouette score de 0.6237
+
+📊 Rendimiento de Modelos:
+
+Clasificación:
+
+Mejor modelo: Logistic Regression
+
+Accuracy: 99.61% ✅
+
+F1-Score: 99.67% ✅
+
+AUC-ROC: 99.89% ✅
+
+Mejora vs baseline: +69.7% 📈
+
+Regresión:
+
+Local Strength (PTS_home): R² = 0.7797 (Ridge)
+
+Away Weakness (PTS_away): R² = 0.7769 (Ridge)
+
+Point Differential: R² = 0.7368 (Ridge)
+
+🎯 Features de Clustering Agregadas:
+
+Para Clasificación (36 features):
+
+HOME_CLUSTER_0, HOME_CLUSTER_1 (one-hot encoding)
+
+AWAY_CLUSTER_0, AWAY_CLUSTER_1 (one-hot encoding)
+
+SAME_CLUSTER, CLUSTER_DIFF
+
+Estadísticas por cluster para ambos equipos
+
+Para Regresión (21 features):
+
+CLUSTER_0, CLUSTER_1 (one-hot encoding)
+
+Estadísticas de cluster
+
+Distancias a centroides
+
+📈 Impacto de la Integración:
+
+Mejor comprensión de los patrones de equipos
+
+Features adicionales que capturan relaciones entre equipos
+
+Mejor rendimiento predictivo en ambos tipos de modelos
+
+Cumplimiento completo de los requisitos de integración supervisado + no supervisado
+
 🚀 Inicio Rápido
 Prerrequisitos
 Python 3.8+
@@ -101,6 +162,7 @@ docker-compose up --build
 # Acceder a los servicios:
 # Airflow: http://localhost:8080 (usuario: airflow, contraseña: airflow)
 # Kedro Viz: http://localhost:4141
+# Streamlit App: http://localhost:8501
 ```
 
 Opción 2: Desarrollo Local
@@ -127,6 +189,9 @@ dvc init
 # Ejecutar pipeline
 kedro run
 ```
+
+Interfaz Web con Streamlit
+El proyecto incluye una interfaz web interactiva desarrollada con Streamlit...
 
 📊 Datasets Utilizados
 El proyecto utiliza 3 datasets principales de Kaggle (NBA Games):
@@ -159,6 +224,8 @@ Servicio	Puerto	Propósito
 Pipeline Kedro	-	Procesamiento de datos y entrenamiento de modelos
 Airflow	8080	Orquestación de pipelines
 Kedro Viz	4141	Visualización de pipelines
+Streamlit	8501	Interfaz web interactiva para predicciones y análisis
+
 
 Comandos Útiles de Docker
 
