@@ -162,7 +162,8 @@ docker-compose up --build
 # Acceder a los servicios:
 # Airflow: http://localhost:8080 (usuario: airflow, contraseña: airflow)
 # Kedro Viz: http://localhost:4141
-
+# Streamlit App: http://localhost:8501
+```
 
 Opción 2: Desarrollo Local
 ```
