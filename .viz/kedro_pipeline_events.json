@@ -1,7 +1,7 @@
 [
   {
     "event": "before_pipeline_run",
-    "timestamp": "2025-11-26T18:20:22.949216+00:00"
+    "timestamp": "2025-11-28T15:25:49.546909+00:00"
   },
   {
     "event": "after_dataset_loaded",
@@ -14,7 +14,7 @@
     "event": "after_node_run",
     "node": "clean_games_data_node",
     "node_id": "cbd61b22",
-    "duration": 0.023847299999999905,
+    "duration": 0.02596540000000047,
     "status": "success"
   },
   {
@@ -35,7 +35,7 @@
     "event": "after_node_run",
     "node": "clean_games_details_node",
     "node_id": "0e54f0de",
-    "duration": 0.40220450000000163,
+    "duration": 0.8074079999999988,
     "status": "success"
   },
   {
@@ -56,7 +56,7 @@
     "event": "after_node_run",
     "node": "clean_teams_data_node",
     "node_id": "19079502",
-    "duration": 0.005157999999999774,
+    "duration": 0.008969100000001617,
     "status": "success"
   },
   {
@@ -77,7 +77,7 @@
     "event": "after_node_run",
     "node": "handle_missing_values_node",
     "node_id": "fb073b62",
-    "duration": 0.034580000000000055,
+    "duration": 0.05485579999999857,
     "status": "success"
   },
   {
@@ -98,7 +98,7 @@
     "event": "after_node_run",
     "node": "create_eda_visualizations_node",
     "node_id": "acc7e326",
-    "duration": 1.4641272,
+    "duration": 2.7839430000000007,
     "status": "success"
   },
   {
@@ -133,7 +133,7 @@
     "event": "after_node_run",
     "node": "create_games_teams_details_node",
     "node_id": "a0075c71",
-    "duration": 0.3211972000000003,
+    "duration": 0.4130924,
     "status": "success"
   },
   {
@@ -161,7 +161,7 @@
     "event": "after_node_run",
     "node": "create_team_features_base_node",
     "node_id": "6ce54654",
-    "duration": 0.10861739999999998,
+    "duration": 0.17289380000000065,
     "status": "success"
   },
   {
@@ -189,7 +189,7 @@
     "event": "after_node_run",
     "node": "create_game_level_features_node",
     "node_id": "83c8f530",
-    "duration": 0.04590130000000059,
+    "duration": 0.0731956000000018,
     "status": "success"
   },
   {
@@ -217,7 +217,7 @@
     "event": "after_node_run",
     "node": "prepare_clustering_data_node",
     "node_id": "667ac66b",
-    "duration": 0.01801060000000021,
+    "duration": 0.054654400000000436,
     "status": "success"
   },
   {
@@ -245,7 +245,7 @@
     "event": "after_node_run",
     "node": "elbow_analysis_node",
     "node_id": "01756c4e",
-    "duration": 2.6669599,
+    "duration": 3.475257299999999,
     "status": "success"
   },
   {
@@ -273,7 +273,7 @@
     "event": "after_node_run",
     "node": "prepare_model_inputs_node",
     "node_id": "c2b01e62",
-    "duration": 0.020056600000000202,
+    "duration": 0.034589900000000284,
     "status": "success"
   },
   {
@@ -308,7 +308,7 @@
     "event": "after_node_run",
     "node": "silhouette_analysis_node",
     "node_id": "2107f360",
-    "duration": 0.5446021999999999,
+    "duration": 0.7746957999999999,
     "status": "success"
   },
   {
@@ -343,7 +343,7 @@
     "event": "after_node_run",
     "node": "validate_data_quality_node",
     "node_id": "6b749fb7",
-    "duration": 0.027021299999997694,
+    "duration": 0.040932300000001476,
     "status": "success"
   },
   {
@@ -378,7 +378,7 @@
     "event": "after_node_run",
     "node": "team_segmentation_node",
     "node_id": "382dabb6",
-    "duration": 0.1223200999999996,
+    "duration": 0.19009479999999712,
     "status": "success"
   },
   {
@@ -413,7 +413,7 @@
     "event": "after_node_run",
     "node": "evaluate_clustering_models_node",
     "node_id": "7a1a2fa4",
-    "duration": 0.050161799999997925,
+    "duration": 0.0736477000000022,
     "status": "success"
   },
   {
@@ -448,7 +448,7 @@
     "event": "after_node_run",
     "node": "prepare_classification_data_with_clusters_node",
     "node_id": "db499aca",
-    "duration": 0.10700549999999964,
+    "duration": 0.14312080000000194,
     "status": "success"
   },
   {
@@ -525,7 +525,7 @@
     "event": "after_node_run",
     "node": "prepare_regression_data_with_clusters_node",
     "node_id": "484f5bef",
-    "duration": 0.0836755999999994,
+    "duration": 0.11715690000000123,
     "status": "success"
   },
   {
@@ -567,7 +567,7 @@
     "event": "after_node_run",
     "node": "interpret_clusters_node",
     "node_id": "4e7c9418",
-    "duration": 0.08371149999999972,
+    "duration": 0.10261189999999942,
     "status": "success"
   },
   {
@@ -595,7 +595,7 @@
     "event": "after_node_run",
     "node": "train_away_weakness_model_node",
     "node_id": "a1a0274d",
-    "duration": 14.996250500000002,
+    "duration": 21.766569500000003,
     "status": "success"
   },
   {
@@ -637,7 +637,7 @@
     "event": "after_node_run",
     "node": "train_classification_models_with_clusters_node",
     "node_id": "93f99a6e",
-    "duration": 324.4153438,
+    "duration": 498.76796809999996,
     "status": "success"
   },
   {
@@ -665,7 +665,7 @@
     "event": "after_node_run",
     "node": "train_local_strength_model_node",
     "node_id": "f1f91318",
-    "duration": 12.050730699999974,
+    "duration": 12.556428300000107,
     "status": "success"
   },
   {
@@ -700,7 +700,7 @@
     "event": "after_node_run",
     "node": "train_point_differential_model_node",
     "node_id": "069d08af",
-    "duration": 13.551857600000005,
+    "duration": 14.10424230000001,
     "status": "success"
   },
   {
@@ -749,7 +749,7 @@
     "event": "after_node_run",
     "node": "create_model_report_node",
     "node_id": "2b35baa9",
-    "duration": 0.005445899999983794,
+    "duration": 0.004070400000045993,
     "status": "success"
   },
   {
@@ -791,7 +791,7 @@
     "event": "after_node_run",
     "node": "evaluate_classification_models_with_clusters_node",
     "node_id": "fb212435",
-    "duration": 0.6531059999999798,
+    "duration": 0.6472827000000052,
     "status": "success"
   },
   {
@@ -833,7 +833,7 @@
     "event": "after_node_run",
     "node": "analyze_best_model_with_clusters_node",
     "node_id": "4a5f1189",
-    "duration": 0.00907620000003817,
+    "duration": 0.010400200000049153,
     "status": "success"
   },
   {
@@ -882,7 +882,7 @@
     "event": "after_node_run",
     "node": "save_classification_results_with_clusters_node",
     "node_id": "47ed93d3",
-    "duration": 0.006718800000044212,
+    "duration": 0.008913000000006832,
     "status": "success"
   },
   {
@@ -915,6 +915,6 @@
   },
   {
     "event": "after_pipeline_run",
-    "timestamp": "2025-11-26T18:26:39.310263+00:00"
+    "timestamp": "2025-11-28T15:35:12.478893+00:00"
   }
 ]
